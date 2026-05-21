@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="fill_parent" n1:layout_height="wrap_content"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <LinearLayout n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.8">
+        <LinearLayout n1:gravity="center" n1:orientation="vertical" n1:id="@id/admin_message" n1:background="?hs__chatBubbleAdminBackground" n1:layout_width="wrap_content" n1:layout_height="wrap_content">
+            <TextView n1:textAppearance="?android:textAppearanceMedium" n1:textColor="?hs__messagesTextColor" n1:id="@android:id/text1" n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="wrap_content" n1:layout_height="wrap_content" />
+            <ProgressBar n1:gravity="center" n1:id="@android:id/progress" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingTop" n1:layout_width="wrap_content" n1:layout_height="wrap_content" style="?android:progressBarStyle" />
+            <View n1:id="@android:id/custom" n1:background="?hs__chatBubbleSeparatorColor" n1:layout_width="fill_parent" n1:layout_height="1.0dip" n1:alpha="0.5" />
+            <ImageButton n1:id="@android:id/button1" n1:background="?hs__selectableItemBackground" n1:paddingTop="@dimen/hs__msgActionButtonPadding" n1:paddingBottom="@dimen/hs__msgActionButtonPadding" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:src="@drawable/hs__action_review" n1:contentDescription="@string/hs__review_title" />
+        </LinearLayout>
+    </LinearLayout>
+    <View n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.2" />
+</LinearLayout>

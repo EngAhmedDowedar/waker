@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout n1:padding="@dimen/hs__content_wrapper_padding" n1:layout_width="fill_parent" n1:layout_height="fill_parent"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <EditText n1:gravity="top" n1:id="@id/hs__conversationDetail" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:hint="@string/hs__new_conversation_hint" n1:lines="@integer/hs__conversation_detail_lines" n1:ems="10" n1:layout_toLeftOf="@id/hs__screenshot" n1:layout_alignParentTop="true" />
+    <ImageView n1:id="@id/hs__screenshot" n1:background="@android:color/darker_gray" n1:padding="1.0dip" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_marginLeft="@dimen/hs__content_wrapper_padding" n1:scaleType="centerCrop" n1:cropToPadding="true" n1:layout_toLeftOf="@android:id/button2" n1:layout_alignParentTop="true" />
+    <ImageButton n1:id="@android:id/button2" n1:background="@android:color/darker_gray" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:src="@drawable/hs__screenshot_clear" n1:text="@string/hs__change_btn" n1:layout_alignParentTop="true" n1:layout_alignParentRight="true" n1:contentDescription="@string/hs__remove_screenshot_btn" />
+    <EditText n1:id="@id/hs__username" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:hint="@string/hs__username_hint" n1:ems="10" n1:layout_below="@id/hs__conversationDetail" />
+    <EditText n1:id="@id/hs__email" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:hint="@string/hs__email_hint" n1:ems="10" n1:layout_below="@id/hs__username" n1:inputType="textEmailAddress" />
+</RelativeLayout>

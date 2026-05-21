@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout n1:layout_width="fill_parent" n1:layout_height="fill_parent" n1:layout_alignParentLeft="true" n1:layout_alignParentTop="true"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <RelativeLayout n1:id="@id/hs__questionContent" n1:layout_width="fill_parent" n1:layout_height="fill_parent">
+        <LinearLayout n1:orientation="vertical" n1:id="@id/hs__webViewParent" n1:paddingLeft="@dimen/hs__content_wrapper_padding" n1:layout_width="fill_parent" n1:layout_height="fill_parent" n1:layout_above="@id/hs__contactUsContainer" />
+        <LinearLayout n1:layout_gravity="bottom" n1:orientation="vertical" n1:id="@id/hs__contactUsContainer" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_alignParentBottom="true">
+            <View n1:background="?hs__faqFooterSeparatorColor" n1:layout_width="fill_parent" n1:layout_height="1.0dip" n1:alpha="0.5" />
+            <RelativeLayout n1:background="?hs__faqsFooterBackgroundColor" n1:paddingLeft="8.0dip" n1:paddingRight="8.0dip" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:splitMotionEvents="false">
+                <Button n1:textAppearance="?android:textAppearanceMedium" n1:textColor="?hs__faqHelpfulButtonTextColor" n1:layout_gravity="center_vertical" n1:id="@id/hs__action_faq_helpful" n1:paddingLeft="10.0dip" n1:paddingRight="10.0dip" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__mark_yes" n1:layout_toLeftOf="@id/hs__action_faq_unhelpful" style="?hs__faqHelpfulButtonStyle" />
+                <Button n1:textAppearance="?android:textAppearanceMedium" n1:textColor="?hs__faqUnhelpfulButtonTextColor" n1:layout_gravity="center_vertical" n1:id="@id/hs__action_faq_unhelpful" n1:paddingLeft="10.0dip" n1:paddingRight="10.0dip" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__mark_no" n1:layout_alignParentTop="true" n1:layout_alignParentRight="true" style="?hs__faqUnhelpfulButtonStyle" />
+                <TextView n1:textAppearance="?android:textAppearanceMedium" n1:id="@id/hs__question" n1:paddingLeft="8.0dip" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_marginBottom="5.0dip" n1:text="@string/hs__mark_yes_no_question" n1:layout_toLeftOf="@id/hs__action_faq_helpful" n1:layout_alignParentLeft="true" n1:layout_centerVertical="true" />
+                <TextView n1:textAppearance="?android:textAppearanceMedium" n1:id="@id/hs__unhelpful_text" n1:paddingTop="12.0dip" n1:paddingBottom="12.0dip" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__question_unhelpful_message" n1:layout_toLeftOf="@id/hs__contact_us_btn" n1:layout_alignParentLeft="true" n1:layout_centerVertical="true" />
+                <Button n1:textAppearance="?android:textAppearanceMedium" n1:id="@id/hs__contact_us_btn" n1:paddingLeft="10.0dip" n1:paddingTop="8.0dip" n1:paddingRight="12.0dip" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__contact_us_btn" n1:layout_alignParentRight="true" n1:layout_centerVertical="true" style="?hs__contactUsButtonStyle" />
+                <TextView n1:textAppearance="?android:textAppearanceMedium" n1:id="@id/hs__helpful_text" n1:paddingTop="12.0dip" n1:paddingBottom="12.0dip" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__question_helpful_message" n1:layout_centerHorizontal="true" n1:layout_centerVertical="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <FrameLayout n1:id="@id/hs__customViewContainer" n1:background="@android:color/black" n1:visibility="gone" n1:layout_width="fill_parent" n1:layout_height="fill_parent" />
+</FrameLayout>

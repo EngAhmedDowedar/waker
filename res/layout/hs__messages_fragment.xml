@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout n1:focusable="true" n1:focusableInTouchMode="true" n1:layout_width="fill_parent" n1:layout_height="fill_parent"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <ListView n1:id="@id/hs__messagesList" n1:layout_width="fill_parent" n1:layout_height="fill_parent" n1:scrollingCache="false" n1:transcriptMode="alwaysScroll" n1:layout_above="@id/hs__confirmation" />
+    <LinearLayout n1:gravity="center" n1:orientation="vertical" n1:id="@id/hs__confirmation" n1:visibility="gone" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_above="@id/hs__new_conversation">
+        <TextView n1:textAppearance="?android:textAppearanceMedium" n1:textColor="?android:textColorPrimary" n1:gravity="center" n1:autoLink="all" n1:id="@android:id/text1" n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__confirmation_msg" />
+        <ProgressBar n1:gravity="center" n1:id="@android:id/progress" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingTop" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" style="?android:progressBarStyle" />
+        <LinearLayout n1:orientation="vertical" n1:id="@android:id/widget_frame" n1:layout_width="fill_parent" n1:layout_height="wrap_content">
+            <View n1:id="@android:id/custom" n1:background="?hs__contentSeparatorColor" n1:layout_width="fill_parent" n1:layout_height="1.0dip" />
+            <LinearLayout n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:splitMotionEvents="false">
+                <ImageButton n1:id="@android:id/button2" n1:background="?hs__selectableItemBackground" n1:paddingTop="@dimen/hs__msgActionButtonPadding" n1:paddingBottom="@dimen/hs__msgActionButtonPadding" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:src="@drawable/hs__action_no" n1:text="@string/hs__unsolved_btn" n1:layout_weight="1.0" n1:contentDescription="@string/hs__unsolved_btn" />
+                <View n1:background="?hs__contentSeparatorColor" n1:layout_width="1.0dip" n1:layout_height="fill_parent" />
+                <ImageButton n1:id="@android:id/button1" n1:background="?hs__selectableItemBackground" n1:paddingTop="@dimen/hs__msgActionButtonPadding" n1:paddingBottom="@dimen/hs__msgActionButtonPadding" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:src="@drawable/hs__action_yes" n1:text="@string/hs__solved_btn" n1:layout_weight="1.0" n1:contentDescription="@string/hs__solved_btn" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout n1:gravity="center" n1:orientation="vertical" n1:id="@id/hs__new_conversation" n1:visibility="gone" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_above="@id/textView1" n1:layout_alignParentBottom="true">
+        <View n1:background="?hs__contentSeparatorColor" n1:layout_width="fill_parent" n1:layout_height="1.0dip" />
+        <ViewStub n1:id="@id/csat_view_stub" n1:layout="@layout/hs__csat_holder" n1:layout_width="fill_parent" n1:layout_height="wrap_content" />
+        <Button n1:id="@id/hs__new_conversation_btn" n1:text="@string/hs__new_conversation_btn" n1:drawableLeft="@drawable/hs__report_issue" style="?hs__contactUsButtonStyle" />
+    </LinearLayout>
+    <View n1:id="@id/textView1" n1:background="?hs__contentSeparatorColor" n1:layout_width="fill_parent" n1:layout_height="1.0dip" n1:layout_above="@id/relativeLayout1" />
+    <RelativeLayout n1:id="@id/relativeLayout1" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_alignParentBottom="true">
+        <EditText n1:id="@id/hs__messageText" n1:paddingBottom="16.0dip" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_marginLeft="4.0dip" n1:layout_marginTop="4.0dip" n1:hint="@string/hs__chat_hint" n1:maxLines="@integer/hs__chat_max_lines" n1:autoText="true" n1:layout_toLeftOf="@id/hs__sendMessageBtn" n1:layout_alignBaseline="@id/hs__sendMessageBtn" n1:inputType="textMultiLine" n1:imeOptions="actionSend" />
+        <ImageButton n1:id="@id/hs__sendMessageBtn" n1:background="?hs__selectableItemBackground" n1:paddingLeft="8.0dip" n1:paddingRight="8.0dip" n1:layout_width="wrap_content" n1:layout_height="52.0dip" n1:src="@drawable/hs__send" n1:layout_alignParentRight="true" n1:contentDescription="@string/hs__send_msg_btn" />
+    </RelativeLayout>
+</RelativeLayout>

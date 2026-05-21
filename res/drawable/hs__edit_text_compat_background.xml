@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector>
+    <item n1:state_window_focused="false" n1:state_enabled="true" n1:drawable="@drawable/hs__text_field_compat_default"
+      xmlns:n1="http://schemas.android.com/apk/res/android" />
+    <item n2:state_window_focused="false" n2:state_enabled="false" n2:drawable="@drawable/hs__text_field_compat_disabled"
+      xmlns:n2="http://schemas.android.com/apk/res/android" />
+    <item n3:state_focused="true" n3:state_enabled="true" n3:drawable="@drawable/hs__text_field_compat_activated"
+      xmlns:n3="http://schemas.android.com/apk/res/android" />
+    <item n4:state_enabled="true" n4:drawable="@drawable/hs__text_field_compat_focused" n4:state_activated="true"
+      xmlns:n4="http://schemas.android.com/apk/res/android" />
+    <item n5:state_enabled="true" n5:drawable="@drawable/hs__text_field_compat_default"
+      xmlns:n5="http://schemas.android.com/apk/res/android" />
+    <item n6:state_focused="true" n6:drawable="@drawable/hs__text_field_compat_disabled_focused"
+      xmlns:n6="http://schemas.android.com/apk/res/android" />
+    <item n7:drawable="@drawable/hs__text_field_compat_disabled"
+      xmlns:n7="http://schemas.android.com/apk/res/android" />
+</selector>

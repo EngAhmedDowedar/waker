@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout n1:orientation="vertical" n1:id="@android:id/message" n1:paddingLeft="@dimen/hs__listPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingRight="@dimen/hs__listPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingTop" n1:layout_width="fill_parent" n1:layout_height="wrap_content"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <LinearLayout n1:layout_width="fill_parent" n1:layout_height="wrap_content">
+        <View n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.2" />
+        <LinearLayout n1:gravity="right" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.8">
+            <LinearLayout n1:gravity="center" n1:orientation="vertical" n1:id="@id/user_message" n1:background="?hs__chatBubbleUserBackground" n1:layout_width="wrap_content" n1:layout_height="wrap_content">
+                <RelativeLayout n1:layout_width="wrap_content" n1:layout_height="wrap_content">
+                    <ImageView n1:id="@android:id/summary" n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="wrap_content" n1:layout_height="wrap_content" />
+                    <ProgressBar n1:gravity="center" n1:id="@android:id/progress" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingTop" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_centerInParent="true" style="?android:progressBarStyleLarge" />
+                </RelativeLayout>
+                <View n1:id="@android:id/custom" n1:background="?hs__chatBubbleSeparatorColor" n1:layout_width="fill_parent" n1:layout_height="1.0dip" n1:alpha="0.4" />
+                <LinearLayout n1:layout_width="fill_parent" n1:layout_height="wrap_content">
+                    <ImageButton n1:id="@android:id/button2" n1:background="?hs__selectableItemBackground" n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgActionButtonPadding" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgActionButtonPadding" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:src="@drawable/hs__action_no" n1:text="@string/hs__change_btn" n1:layout_weight="1.0" />
+                    <View n1:background="?hs__chatBubbleSeparatorColor" n1:layout_width="1.0dip" n1:layout_height="fill_parent" n1:alpha="0.4" />
+                    <ImageButton n1:id="@android:id/button3" n1:background="?hs__selectableItemBackground" n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgActionButtonPadding" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgActionButtonPadding" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:src="@drawable/hs__action_yes" n1:text="@string/hs__done_btn" n1:layout_weight="1.0" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

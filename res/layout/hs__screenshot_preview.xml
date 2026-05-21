@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge n1:layout_width="fill_parent" n1:layout_height="fill_parent"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <ImageView n1:id="@id/screenshotPreview" n1:layout_width="fill_parent" n1:layout_height="fill_parent" n1:layout_above="@id/horizontal_divider" />
+    <View n1:id="@id/horizontal_divider" n1:layout_width="fill_parent" n1:layout_height="1.0dip" n1:layout_above="@id/button_containers" style="@style/HSDivider" />
+    <LinearLayout n1:orientation="horizontal" n1:id="@id/button_containers" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_above="@id/hs__helpshiftActivityFooter" n1:splitMotionEvents="false">
+        <Button n1:id="@id/change" n1:background="?hs__selectableItemBackground" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:text="@string/hs__change_btn" n1:layout_weight="0.5" />
+        <View n1:layout_width="1.0dip" n1:layout_height="fill_parent" style="@style/HSDivider" />
+        <Button n1:id="@id/send" n1:background="?hs__selectableItemBackground" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:text="@string/hs__send_msg_btn" n1:layout_weight="0.5" />
+    </LinearLayout>
+    <ImageView n1:id="@id/hs__helpshiftActivityFooter" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_alignParentBottom="true" />
+</merge>

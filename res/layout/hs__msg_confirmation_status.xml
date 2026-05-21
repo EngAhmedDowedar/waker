@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout n1:orientation="vertical" n1:paddingLeft="@dimen/hs__listPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="fill_parent" n1:layout_height="wrap_content"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <LinearLayout n1:layout_width="fill_parent" n1:layout_height="wrap_content">
+        <LinearLayout n1:id="@id/admin_message" n1:background="?hs__chatBubbleAdminBackground" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.8">
+            <TextView n1:textAppearance="?android:textAppearanceMedium" n1:textColor="?hs__messagesTextColor" n1:id="@android:id/text1" n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="wrap_content" n1:layout_height="wrap_content" />
+        </LinearLayout>
+        <View n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.2" />
+    </LinearLayout>
+    <TextView n1:textSize="@dimen/hs__textSizeSmall" n1:id="@android:id/text2" n1:paddingLeft="@dimen/hs__msg_timestamp_padding" n1:paddingTop="3.0dip" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:alpha="@dimen/hs__msg_timestamp_alpha" />
+</LinearLayout>

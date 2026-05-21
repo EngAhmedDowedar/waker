@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout n1:orientation="vertical" n1:id="@id/title" n1:background="@color/title_background" n1:layout_width="fill_parent" n1:layout_height="wrap_content"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <RelativeLayout n1:id="@id/titleLayout" n1:layout_width="fill_parent" n1:layout_height="44.0dip">
+        <Button n1:textColor="@android:color/white" n1:id="@id/titleLeft" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_margin="5.0dip" n1:layout_alignParentLeft="true" n1:layout_centerVertical="true" />
+        <TextView n1:textSize="15.0dip" n1:textColor="@android:color/white" n1:id="@id/titleText" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="Select payment" n1:maxEms="7" n1:layout_centerInParent="true" />
+        <ImageButton n1:textColor="@android:color/white" n1:id="@id/title_right" n1:background="@android:color/transparent" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_marginRight="15.0dip" n1:layout_alignParentRight="true" n1:layout_centerVertical="true" />
+        <Button n1:textColor="@android:color/white" n1:id="@id/title_slaveright" n1:visibility="gone" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_margin="5.0dip" n1:layout_toLeftOf="@id/title_right" n1:layout_centerVertical="true" />
+    </RelativeLayout>
+    <ProgressBar n1:layout_gravity="bottom|center" n1:id="@id/ProgressBar" n1:visibility="gone" n1:layout_width="fill_parent" n1:layout_height="3.0dip" n1:max="100" n1:indeterminateOnly="false" n1:progressDrawable="@android:drawable/progress_horizontal" />
+</LinearLayout>

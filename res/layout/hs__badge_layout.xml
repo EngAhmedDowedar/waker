@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout n1:gravity="center" n1:background="?hs__selectableItemBackground" n1:clickable="true" n1:layout_width="wrap_content" n1:layout_height="fill_parent"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <TextView n1:gravity="center" n1:id="@id/hs__conversation_icon" n1:background="?hs__conversationActionButtonIcon" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_margin="8.0dip" n1:contentDescription="@string/hs__new_conversation_header" />
+    <TextView n1:textSize="16.0sp" n1:textStyle="bold" n1:textColor="?hs__actionButtonNotificationTextColor" n1:gravity="center" n1:id="@id/hs__notification_badge" n1:background="?hs__conversationNotificationActionButtonIcon" n1:paddingRight="8.0dip" n1:paddingBottom="1.0dip" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_marginLeft="8.0dip" n1:layout_marginRight="8.0dip" />
+</LinearLayout>

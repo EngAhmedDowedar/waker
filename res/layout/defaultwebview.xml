@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout n1:layout_width="fill_parent" n1:layout_height="fill_parent"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <LinearLayout n1:orientation="vertical" n1:layout_width="fill_parent" n1:layout_height="fill_parent" n1:layout_marginTop="0.0dip" n1:layout_centerHorizontal="true">
+        <RelativeLayout n1:layout_width="fill_parent" n1:layout_height="wrap_content">
+            <LinearLayout n1:orientation="horizontal" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:layout_marginTop="0.0dip" n1:baselineAligned="false">
+                <LinearLayout n1:background="@drawable/nge_android_webview_panel_left" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_marginTop="0.0dip" />
+                <LinearLayout n1:background="@drawable/nge_android_webview_panel_center" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_marginTop="0.0dip" n1:layout_weight="1.0" />
+                <LinearLayout n1:background="@drawable/nge_android_webview_panel_right" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_marginTop="0.0dip" />
+            </LinearLayout>
+            <ImageButton n1:id="@id/imageButtonClose" n1:background="#00000000" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:src="@drawable/nge_defaultwebview_btn_close" n1:layout_alignParentLeft="true" n1:layout_alignParentTop="true" />
+            <ImageButton n1:id="@id/imageButtonReload" n1:background="#00000000" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:src="@drawable/nge_defaultwebview_btn_reload" n1:layout_alignParentTop="true" n1:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <WebView n1:id="@id/webview" n1:layout_width="fill_parent" n1:layout_height="0.0dip" n1:layout_weight="1.0" />
+    </LinearLayout>
+</RelativeLayout>

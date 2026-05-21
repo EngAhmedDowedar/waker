@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+    <TextView n1:gravity="center_horizontal" n1:id="@id/csat_message" n1:paddingTop="25.0dip" n1:paddingBottom="21.0dip" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__csat_message" n1:layout_centerHorizontal="true"
+      xmlns:n1="http://schemas.android.com/apk/res/android" />
+    <RatingBar n2:id="@id/ratingBar" n2:paddingBottom="6.0dip" n2:layout_width="wrap_content" n2:layout_height="wrap_content" n2:stepSize="1.0" n2:layout_below="@id/csat_message" n2:layout_centerHorizontal="true" n2:contentDescription="@string/hs__csat_ratingbar"
+      xmlns:n2="http://schemas.android.com/apk/res/android" />
+    <TextView n3:id="@id/csat_dislike_msg" n3:layout_width="wrap_content" n3:layout_height="wrap_content" n3:text="@string/hs__csat_dislike_message" n3:layout_below="@id/ratingBar" n3:layout_alignLeft="@id/ratingBar"
+      xmlns:n3="http://schemas.android.com/apk/res/android" />
+    <TextView n4:id="@id/csat_like_msg" n4:layout_width="wrap_content" n4:layout_height="wrap_content" n4:text="@string/hs__csat_like_message" n4:layout_below="@id/ratingBar" n4:layout_alignRight="@id/ratingBar"
+      xmlns:n4="http://schemas.android.com/apk/res/android" />
+    <RelativeLayout n5:id="@id/divider" n5:layout_width="fill_parent" n5:layout_height="wrap_content" n5:layout_below="@id/csat_dislike_msg"
+      xmlns:n5="http://schemas.android.com/apk/res/android">
+        <View n5:layout_marginRight="3.0dip" n5:layout_toLeftOf="@id/option_text" n5:layout_centerVertical="true" style="@style/HSDivider" />
+        <TextView n5:id="@id/option_text" n5:paddingBottom="3.0dip" n5:layout_width="wrap_content" n5:layout_height="wrap_content" n5:text="@string/hs__csat_option_message" n5:includeFontPadding="false" n5:layout_centerHorizontal="true" />
+        <View n5:layout_marginLeft="3.0dip" n5:layout_toRightOf="@id/option_text" n5:layout_centerVertical="true" style="@style/HSDivider" />
+    </RelativeLayout>
+</merge>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+    <item n1:icon="?hs__attachScreenshotActionButtonIcon" n1:id="@id/hs__attach_screenshot" n1:title="@string/hs__attach_screenshot_btn" n1:showAsAction="always"
+      xmlns:n1="http://schemas.android.com/apk/res/android" />
+    <item n2:icon="?hs__startConversationActionButtonIcon" n2:id="@id/hs__action_add_conversation" n2:title="@string/hs__submit_conversation_btn" n2:showAsAction="always"
+      xmlns:n2="http://schemas.android.com/apk/res/android" />
+</menu>

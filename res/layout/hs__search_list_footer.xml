@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout n1:gravity="center" n1:orientation="vertical" n1:layout_width="fill_parent" n1:layout_height="fill_parent"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <TextView n1:paddingTop="@dimen/hs__listPreferredItemPaddingTop" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:text="@string/hs__search_footer" />
+    <Button n1:id="@id/report_issue" n1:layout_marginBottom="@dimen/hs__listPreferredItemPaddingBottom" n1:text="@string/hs__contact_us_btn" n1:drawableLeft="@drawable/hs__report_issue" style="?hs__contactUsButtonStyle" />
+</LinearLayout>

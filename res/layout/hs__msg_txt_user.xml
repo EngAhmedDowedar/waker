@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="fill_parent" n1:layout_height="wrap_content"
+  xmlns:n1="http://schemas.android.com/apk/res/android">
+    <View n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.2" />
+    <LinearLayout n1:gravity="right" n1:orientation="vertical" n1:layout_width="0.0dip" n1:layout_height="wrap_content" n1:layout_weight="0.8">
+        <LinearLayout n1:gravity="center" n1:orientation="vertical" n1:id="@id/user_message" n1:background="?hs__chatBubbleUserBackground" n1:layout_width="wrap_content" n1:layout_height="wrap_content">
+            <TextView n1:textAppearance="?android:textAppearanceMedium" n1:textColor="?hs__messagesTextColor" n1:autoLink="all" n1:id="@android:id/text1" n1:paddingLeft="@dimen/hs__msgPreferredItemPaddingLeft" n1:paddingTop="@dimen/hs__msgPreferredItemPaddingTop" n1:paddingRight="@dimen/hs__msgPreferredItemPaddingRight" n1:paddingBottom="@dimen/hs__msgPreferredItemPaddingBottom" n1:layout_width="wrap_content" n1:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout n1:gravity="center" n1:layout_width="wrap_content" n1:layout_height="wrap_content">
+            <ImageView n1:id="@android:id/icon" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:src="@drawable/hs__warning" />
+            <TextView n1:textSize="@dimen/hs__textSizeSmall" n1:id="@android:id/text2" n1:paddingTop="3.0dip" n1:paddingRight="@dimen/hs__msg_timestamp_padding" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:alpha="@dimen/hs__msg_timestamp_alpha" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,50 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: game.apk
+compressionType: false
+doNotCompress:
+- resources.arsc
+- META-INF/android.arch.lifecycle_runtime.version
+- META-INF/com.android.support_animated-vector-drawable.version
+- META-INF/com.android.support_appcompat-v7.version
+- META-INF/com.android.support_cardview-v7.version
+- META-INF/com.android.support_customtabs.version
+- META-INF/com.android.support_support-compat.version
+- META-INF/com.android.support_support-core-ui.version
+- META-INF/com.android.support_support-core-utils.version
+- META-INF/com.android.support_support-fragment.version
+- META-INF/com.android.support_support-media-compat.version
+- META-INF/com.android.support_support-v4.version
+- META-INF/com.android.support_support-vector-drawable.version
+- png
+- wav
+- mp3
+- assets/FactionFactory_exp.city
+- jpg
+- assets/device.dri
+- assets/yb_skill_exp.city
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '14'
+  targetSdkVersion: '26'
+sharedLibrary: false
+sparseResources: false
+unknownFiles:
+  build-data.properties: '8'
+  protobuf.meta: '8'
+  com/anansimobile/nge/IAB/README: '0'
+  com/android/vending/billing/README: '8'
+  error_prone/Annotations.gwt.xml: '8'
+  jsr305_annotations/Jsr305_annotations.gwt.xml: '8'
+  third_party/java_src/error_prone/project/annotations/Annotations.gwt.xml: '8'
+  third_party/java_src/error_prone/project/annotations/Google_internal.gwt.xml: '8'
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.5.0-dirty
+versionInfo:
+  versionCode: '2090800068'
+  versionName: 1.1.38
