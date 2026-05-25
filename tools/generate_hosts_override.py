@@ -29,7 +29,7 @@ def is_valid_host(host: str) -> bool:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate local hosts override entries from extracted endpoint inventory.")
-    parser.add_argument("--inventory", default="revival/endpoints_inventory.json")
+    parser.add_argument("--inventory", default="revival/endpoint_inventory.json")
     parser.add_argument("--ip", default="127.0.0.1")
     parser.add_argument("--output", default="revival/hosts.override")
     args = parser.parse_args()

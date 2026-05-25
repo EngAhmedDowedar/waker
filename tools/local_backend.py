@@ -141,7 +141,10 @@ class Handler(BaseHTTPRequestHandler):
                 return
             delta_coins = int(body.get("deltaCoins", 0))
             delta_level = int(body.get("deltaLevel", 0))
-            profile = STATE["profiles"][player_id]
+            profile = STATE["profiles"].get(player_id)
+            if not profile:
+                self._send_json({"ok": False, "error": "profile_not_found"}, HTTPStatus.NOT_FOUND)
+                return
             profile["coins"] = max(0, int(profile["coins"]) + delta_coins)
             profile["level"] = max(1, int(profile["level"]) + delta_level)
             self._send_json({"ok": True, "profile": profile})

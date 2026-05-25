@@ -11,7 +11,7 @@ This repository is a decompiled Android client, so this toolkit focuses on local
 ```bash
 python3 tools/extract_endpoints.py \
   --root . \
-  --output revival/endpoints_inventory.json
+  --output revival/endpoint_inventory.json
 ```
 
 ## 2) Run local backend
@@ -36,7 +36,7 @@ Available endpoints:
 
 ```bash
 python3 tools/generate_hosts_override.py \
-  --inventory revival/endpoints_inventory.json \
+  --inventory revival/endpoint_inventory.json \
   --output revival/hosts.override
 ```
 

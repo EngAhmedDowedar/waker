@@ -159,7 +159,7 @@ def main() -> None:
     parser.add_argument("--root", default=".", help="Repository root to scan.")
     parser.add_argument(
         "--output",
-        default="revival/endpoints_inventory.json",
+        default="revival/endpoint_inventory.json",
         help="Path to write JSON inventory.",
     )
     args = parser.parse_args()
