@@ -105,6 +105,13 @@ class Handler(BaseHTTPRequestHandler):
         parsed = body_details.get("parsed")
         return parsed if isinstance(parsed, dict) else {}
 
+    def _first_present(self, body: Dict[str, Any], *keys: str) -> Any:
+        for key in keys:
+            value = body.get(key)
+            if value is not None:
+                return value
+        return None
+
     def _token_from_request(self) -> str:
         auth = self.headers.get("Authorization", "")
         if auth.startswith("Bearer "):
@@ -187,7 +194,9 @@ class Handler(BaseHTTPRequestHandler):
         self._log_request(body_details)
 
         if path == "/auth/login":
-            username = body.get("username") or body.get("user") or body.get("deviceId") or "player_local"
+            username = self._first_present(body, "username", "user", "deviceId")
+            if username is None:
+                username = "player_local"
             player_id = f"p_{hashlib.sha256(username.encode('utf-8')).hexdigest()[:16]}"
             token = secrets.token_hex(24)
             STATE["tokens"][token] = player_id
@@ -261,7 +270,9 @@ def main() -> None:
             try:
                 p = int(part.strip())
             except ValueError:
-                parser.error(f"Invalid port value in --ports: {part!r} (must be an integer)")
+                parser.error(f"Invalid port value in --ports: {part!r} (must be an integer between 1 and 65535)")
+            if not 1 <= p <= 65535:
+                parser.error(f"Invalid port value in --ports: {part!r} (must be an integer between 1 and 65535)")
             if p not in ports:
                 ports.append(p)
     else:
