@@ -3,10 +3,11 @@ import argparse
 import hashlib
 import json
 import secrets
+import threading
 import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from typing import Dict
+from typing import Dict, List
 from urllib.parse import parse_qs, urlparse
 
 # Guardrails for local state mutation endpoints to prevent unrealistic accidental or malicious jumps.
@@ -49,6 +50,15 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
         print(f"RESPONSE {self.command} {self.path} status={status} body={self._safe_json(payload)}")
+
+    def _send_html(self, html: str, status: int = HTTPStatus.OK) -> None:
+        body = html.encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+        print(f"RESPONSE {self.command} {self.path} status={status} body=<html>")
 
     def _read_json(self) -> Dict:
         length = int(self.headers.get("Content-Length", "0"))
@@ -128,7 +138,14 @@ class Handler(BaseHTTPRequestHandler):
             )
             return
 
-        self._send_json({"ok": False, "error": "not_found", "path": path}, HTTPStatus.NOT_FOUND)
+        if path == "/page/pwdreset":
+            self._send_html(
+                "<html><body><h1>Local password reset placeholder</h1>"
+                "<p>Backend override is active.</p></body></html>"
+            )
+            return
+
+        self._send_json({"ok": True, "fallback": True, "method": "GET", "path": path})
 
     def do_POST(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
@@ -182,18 +199,50 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json({"ok": True, "profile": profile})
             return
 
-        self._send_json({"ok": False, "error": "not_found", "path": path}, HTTPStatus.NOT_FOUND)
+        if path == "/logevent/weightevent":
+            self._send_json({"ok": True, "accepted": True, "event": body})
+            return
+
+        self._send_json({"ok": True, "fallback": True, "method": "POST", "path": path, "echo": body})
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Minimal local backend for reviving legacy game client flows.")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8080)
+    parser.add_argument("--ports", default="", help="Comma-separated ports to bind, e.g. 8080,8992,2095")
     args = parser.parse_args()
 
-    server = ThreadingHTTPServer((args.host, args.port), Handler)
-    print(f"Listening on http://{args.host}:{args.port}")
-    server.serve_forever()
+    ports: List[int] = [args.port]
+    if args.ports.strip():
+        ports = []
+        for part in args.ports.split(","):
+            p = int(part.strip())
+            if p not in ports:
+                ports.append(p)
+    else:
+        for fallback_port in (8992, 2095):
+            if fallback_port not in ports:
+                ports.append(fallback_port)
+
+    servers: List[ThreadingHTTPServer] = []
+    threads: List[threading.Thread] = []
+    for port in ports:
+        server = ThreadingHTTPServer((args.host, port), Handler)
+        servers.append(server)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        threads.append(thread)
+        print(f"Listening on http://{args.host}:{port}")
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Shutting down...")
+        for server in servers:
+            server.shutdown()
+            server.server_close()
 
 
 if __name__ == "__main__":

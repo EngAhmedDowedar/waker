@@ -27,7 +27,7 @@ Output:
    ```
 2. Start backend:
    ```bash
-   python3 /home/runner/work/waker/waker/tools/local_backend.py --host 0.0.0.0 --port 8080
+   python3 /home/runner/work/waker/waker/tools/local_backend.py --host 0.0.0.0 --ports 8080,8992,2095
    ```
 3. Confirm it is alive:
    ```bash
@@ -61,6 +61,11 @@ Output:
   - body fields:
     - `deltaCoins` (int, max absolute `1000000`)
     - `deltaLevel` (int, max absolute `10000`)
+- `POST /logevent/weightevent`
+  - accepts any JSON and returns `{ok:true}` to avoid analytics hard-fail
+- `GET /page/pwdreset`
+  - returns placeholder HTML page
+- unknown `GET/POST` endpoints now return safe fallback `{ok:true, fallback:true, ...}` for resilience
 
 Verbose request/response logs are enabled in backend output.
 
@@ -91,7 +96,12 @@ python3 /home/runner/work/waker/waker/tools/generate_hosts_override.py \
 
 ### Android emulator/device
 
-- **Emulator running backend on same emulator**: `--ip 127.0.0.1`
+- **USB device / emulator recommended path**: keep hosts IP as `127.0.0.1` and use adb reverse:
+  ```bash
+  adb reverse tcp:8080 tcp:8080
+  adb reverse tcp:8992 tcp:8992
+  adb reverse tcp:2095 tcp:2095
+  ```
 - **Physical Android device to your PC backend**: regenerate with your PC LAN IP:
   ```bash
   python3 /home/runner/work/waker/waker/tools/generate_hosts_override.py \
@@ -200,18 +210,24 @@ adb install -r /home/runner/work/waker/waker/dist/waker-local-signed.apk
 
 ## 8) Boot + localhost connection checklist
 
-1. Start backend (`0.0.0.0:8080`).
-2. Apply hosts mapping on target Android (or emulator).
-3. Install signed APK.
-4. Launch app:
+1. Start backend (`0.0.0.0` on ports `8080,8992,2095`).
+2. If using adb connection, apply reverse:
+   ```bash
+   adb reverse tcp:8080 tcp:8080
+   adb reverse tcp:8992 tcp:8992
+   adb reverse tcp:2095 tcp:2095
+   ```
+3. Apply hosts mapping on target Android (or emulator).
+4. Install signed APK.
+5. Launch app:
    ```bash
    adb shell monkey -p com.anansimobile.city_ar -c android.intent.category.LAUNCHER 1
    ```
-5. Watch app network logs:
+6. Watch app network logs:
    ```bash
    adb logcat | grep -Ei 'anansi|city|http|ssl|connect|downloader|lvl'
    ```
-6. Confirm backend receives requests in terminal (verbose logs).
+7. Confirm backend receives requests in terminal (verbose logs).
 
 If no backend hits appear, traffic is likely still inside native flow with unsupported protocol/TLS requirements.
 
