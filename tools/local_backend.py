@@ -220,7 +220,7 @@ def main() -> None:
             try:
                 p = int(part.strip())
             except ValueError:
-                parser.error(f"Invalid port value in --ports: {part!r}")
+                parser.error(f"Invalid port value in --ports: {part!r} (must be an integer)")
             if p not in ports:
                 ports.append(p)
     else:
