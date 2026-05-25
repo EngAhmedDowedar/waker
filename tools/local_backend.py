@@ -217,7 +217,10 @@ def main() -> None:
     if args.ports.strip():
         ports = []
         for part in args.ports.split(","):
-            p = int(part.strip())
+            try:
+                p = int(part.strip())
+            except ValueError:
+                parser.error(f"Invalid port value in --ports: {part!r}")
             if p not in ports:
                 ports.append(p)
     else:
