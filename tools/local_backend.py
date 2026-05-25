@@ -23,6 +23,24 @@ STATE: Dict[str, Dict] = {
 class Handler(BaseHTTPRequestHandler):
     server_version = "WakerLocalBackend/0.1"
 
+    def _safe_json(self, payload: Dict, max_len: int = 800) -> str:
+        try:
+            text = json.dumps(payload, ensure_ascii=False)
+        except Exception:
+            text = str(payload)
+        if len(text) > max_len:
+            return text[:max_len] + "...(truncated)"
+        return text
+
+    def _log_request(self, body: Dict | None = None) -> None:
+        headers = {k: v for k, v in self.headers.items()}
+        if "Authorization" in headers:
+            headers["Authorization"] = "Bearer <redacted>"
+        msg = f"{self.command} {self.path} headers={self._safe_json(headers)}"
+        if body is not None:
+            msg += f" body={self._safe_json(body)}"
+        print(msg)
+
     def _send_json(self, payload: Dict, status: int = HTTPStatus.OK) -> None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
@@ -30,6 +48,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+        print(f"RESPONSE {self.command} {self.path} status={status} body={self._safe_json(payload)}")
 
     def _read_json(self) -> Dict:
         length = int(self.headers.get("Content-Length", "0"))
@@ -53,6 +72,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
+        self._log_request()
         if path in ("/health", "/ping"):
             self._send_json({"ok": True, "service": "waker-local-backend", "ts": int(time.time())})
             return
@@ -113,6 +133,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
         body = self._read_json()
+        self._log_request(body)
 
         if path == "/auth/login":
             # Intentionally permissive for local revival/testing: creates local profile on first login.

@@ -279,73 +279,12 @@
 .end method
 
 .method private expansionFilesDelivered()Z
-    .locals 8
+    .locals 1
 
     .prologue
-    const/4 v4, 0x1
+    const/4 v0, 0x1
 
-    const/4 v3, 0x0
-
-    .line 177
-    :try_start_0
-    invoke-virtual {p0}, Lcom/anansimobile/city_ar/Main;->getPackageManager()Landroid/content/pm/PackageManager;
-
-    move-result-object v5
-
-    invoke-virtual {p0}, Lcom/anansimobile/city_ar/Main;->getPackageName()Ljava/lang/String;
-
-    move-result-object v6
-
-    const/4 v7, 0x0
-
-    invoke-virtual {v5, v6, v7}, Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;
-
-    move-result-object v5
-
-    iget v2, v5, Landroid/content/pm/PackageInfo;->versionCode:I
-
-    .line 178
-    .local v2, "version":I
-    const/4 v5, 0x1
-
-    invoke-static {p0, v5, v2}, Lcom/google/android/vending/expansion/downloader/Helpers;->getExpansionAPKFileName(Landroid/content/Context;ZI)Ljava/lang/String;
-
-    move-result-object v1
-
-    .line 179
-    .local v1, "fileName":Ljava/lang/String;
-    iget-wide v6, p0, Lcom/anansimobile/city_ar/Main;->expansionFileSize:J
-
-    const/4 v5, 0x0
-
-    invoke-static {p0, v1, v6, v7, v5}, Lcom/google/android/vending/expansion/downloader/Helpers;->doesFileExist(Landroid/content/Context;Ljava/lang/String;JZ)Z
-    :try_end_0
-    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
-
-    move-result v5
-
-    if-nez v5, :cond_0
-
-    .line 186
-    .end local v1    # "fileName":Ljava/lang/String;
-    .end local v2    # "version":I
-    :goto_0
-    return v3
-
-    .line 182
-    :catch_0
-    move-exception v0
-
-    .line 183
-    .local v0, "e":Ljava/lang/Exception;
-    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
-
-    .end local v0    # "e":Ljava/lang/Exception;
-    :cond_0
-    move v3, v4
-
-    .line 186
-    goto :goto_0
+    return v0
 .end method
 
 
