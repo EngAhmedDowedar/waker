@@ -112,6 +112,17 @@ class Handler(BaseHTTPRequestHandler):
                 return value
         return None
 
+    def _coerce_text(self, value: Any, default: str) -> str:
+        if value is None:
+            return default
+        if isinstance(value, list):
+            if not value:
+                return default
+            value = value[0]
+        if isinstance(value, bytes):
+            return value.decode("utf-8", errors="replace")
+        return str(value)
+
     def _token_from_request(self) -> str:
         auth = self.headers.get("Authorization", "")
         if auth.startswith("Bearer "):
@@ -195,8 +206,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/auth/login":
             username = self._first_present(body, "username", "user", "deviceId")
-            if username is None:
-                username = "player_local"
+            username = self._coerce_text(username, "player_local")
             player_id = f"p_{hashlib.sha256(username.encode('utf-8')).hexdigest()[:16]}"
             token = secrets.token_hex(24)
             STATE["tokens"][token] = player_id
