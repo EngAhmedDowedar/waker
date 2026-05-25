@@ -10,7 +10,7 @@ URL_RE = re.compile(
     r"https?://[A-Za-z0-9.-]+(?::\d{2,5})?(?:/[A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;=%]*)?"
 )
 PRINTF_TOKEN_RE = re.compile(r"%(\d+\$)?[sd]")
-PLACEHOLDER_HOSTS = {"hostname", "close_view"}
+PLACEHOLDER_HOSTS = {"hostname", "close_view", "close"}
 IP_RE = re.compile(r"^\d{1,3}(?:\.\d{1,3}){3}$")
 IP_PORT_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}(?::\d{2,5})?\b")
 HOST_PORT_RE = re.compile(
@@ -52,6 +52,8 @@ def collect_patterns(text: str, source: str, hits: Dict[str, List[str]], out: Di
         if host.startswith(".") or host.endswith("."):
             return False
         if "%" in host:
+            return False
+        if "." not in host:
             return False
         if IP_RE.match(host):
             return False

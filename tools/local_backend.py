@@ -9,6 +9,10 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Dict
 from urllib.parse import parse_qs, urlparse
 
+# Guardrails for local state mutation endpoints to prevent unrealistic accidental or malicious jumps.
+MAX_DELTA_COINS = 1_000_000
+MAX_DELTA_LEVEL = 10_000
+
 
 STATE: Dict[str, Dict] = {
     "tokens": {},
@@ -141,7 +145,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             delta_coins = int(body.get("deltaCoins", 0))
             delta_level = int(body.get("deltaLevel", 0))
-            if abs(delta_coins) > 1_000_000 or abs(delta_level) > 10_000:
+            if abs(delta_coins) > MAX_DELTA_COINS or abs(delta_level) > MAX_DELTA_LEVEL:
                 self._send_json({"ok": False, "error": "delta_out_of_range"}, HTTPStatus.BAD_REQUEST)
                 return
             profile = STATE["profiles"].get(player_id)
