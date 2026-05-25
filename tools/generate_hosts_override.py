@@ -9,7 +9,8 @@ DEFAULT_HOSTS = [
     "wild-city-9abb9.firebaseio.com",
     "wild-city-9abb9.appspot.com",
 ]
-HOST_RE = re.compile(r"^(?:\d{1,3}(?:\.\d{1,3}){3}|[A-Za-z0-9][A-Za-z0-9.-]*[A-Za-z0-9])$")
+HOST_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9.-]*[A-Za-z0-9]$")
+IP_RE = re.compile(r"^\d{1,3}(?:\.\d{1,3}){3}$")
 
 
 def is_valid_host(host: str) -> bool:
@@ -18,6 +19,10 @@ def is_valid_host(host: str) -> bool:
     if host.startswith(".") or host.endswith("."):
         return False
     if not HOST_RE.match(host):
+        return False
+    if ".." in host:
+        return False
+    if IP_RE.match(host):
         return False
     return True
 

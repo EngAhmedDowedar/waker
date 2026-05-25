@@ -29,7 +29,7 @@ SKIP_TEXT_FILES = {"protobuf.meta"}
 
 
 def extract_strings_from_binary(blob: bytes, minimum: int = 4) -> Iterable[str]:
-    pattern = re.compile(rb"[\x20-\x7E]{%d,}" % minimum)
+    pattern = re.compile(rf"[\x20-\x7E]{{{minimum},}}".encode("ascii"))
     for match in pattern.findall(blob):
         try:
             yield match.decode("utf-8", errors="ignore")
@@ -38,7 +38,18 @@ def extract_strings_from_binary(blob: bytes, minimum: int = 4) -> Iterable[str]:
 
 
 def collect_patterns(text: str, source: str, hits: Dict[str, List[str]], out: Dict[str, Set[str]]) -> None:
-    urls = URL_RE.findall(text)
+    raw_urls = URL_RE.findall(text)
+    urls: List[str] = []
+    for raw_url in raw_urls:
+        try:
+            parsed = urlparse(raw_url)
+        except Exception:
+            continue
+        if parsed.scheme not in {"http", "https"}:
+            continue
+        if not parsed.hostname:
+            continue
+        urls.append(raw_url)
     ips = IP_PORT_RE.findall(text)
     host_ports = [f"{h}:{p}" for h, p in HOST_PORT_RE.findall(text)]
 

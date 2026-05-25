@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
 import json
 import secrets
 import time
@@ -103,7 +104,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/auth/login":
             username = body.get("username") or body.get("user") or body.get("deviceId") or "player_local"
-            player_id = f"p_{abs(hash(username)) % 10_000_000}"
+            player_id = f"p_{hashlib.sha256(username.encode('utf-8')).hexdigest()[:8]}"
             token = secrets.token_hex(24)
             STATE["tokens"][token] = player_id
             if player_id not in STATE["profiles"]:
@@ -142,7 +143,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Minimal local backend for reviving legacy game client flows.")
-    parser.add_argument("--host", default="0.0.0.0")
+    parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
 

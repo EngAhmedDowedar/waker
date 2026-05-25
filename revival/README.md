@@ -17,8 +17,10 @@ python3 /home/runner/work/waker/waker/tools/extract_endpoints.py \
 ## 2) Run local backend
 
 ```bash
-python3 /home/runner/work/waker/waker/tools/local_backend.py --host 0.0.0.0 --port 8080
+python3 /home/runner/work/waker/waker/tools/local_backend.py --port 8080
 ```
+
+Use `--host 0.0.0.0` only when you explicitly need remote devices on your LAN to connect.
 
 Available endpoints:
 
