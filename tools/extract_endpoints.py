@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 
 URL_RE = re.compile(r"https?://[A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;=%]+")
 PRINTF_TOKEN_RE = re.compile(r"%(\d+\$)?[sd]")
+PLACEHOLDER_HOSTS = {"hostname", "close_view"}
 IP_PORT_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}(?::\d{2,5})?\b")
 HOST_PORT_RE = re.compile(
     r"\b((?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)\.)+[A-Za-z]{2,63}):(\d{2,5})\b"
@@ -49,7 +50,7 @@ def collect_patterns(text: str, source: str, hits: Dict[str, List[str]], out: Di
             return False
         if "%" in host:
             return False
-        if host in {"hostname", "close_view"}:
+        if host in PLACEHOLDER_HOSTS:
             return False
         return True
 

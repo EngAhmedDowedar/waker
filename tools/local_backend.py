@@ -75,7 +75,11 @@ class Handler(BaseHTTPRequestHandler):
             if not player_id:
                 self._send_json({"ok": False, "error": "unauthorized"}, HTTPStatus.UNAUTHORIZED)
                 return
-            self._send_json({"ok": True, "profile": STATE["profiles"][player_id]})
+            profile = STATE["profiles"].get(player_id)
+            if not profile:
+                self._send_json({"ok": False, "error": "profile_not_found"}, HTTPStatus.NOT_FOUND)
+                return
+            self._send_json({"ok": True, "profile": profile})
             return
 
         if path == "/player/state":
@@ -84,13 +88,17 @@ class Handler(BaseHTTPRequestHandler):
             if not player_id:
                 self._send_json({"ok": False, "error": "unauthorized"}, HTTPStatus.UNAUTHORIZED)
                 return
+            profile = STATE["profiles"].get(player_id)
+            if not profile:
+                self._send_json({"ok": False, "error": "profile_not_found"}, HTTPStatus.NOT_FOUND)
+                return
             self._send_json(
                 {
                     "ok": True,
                     "state": {
                         "playerId": player_id,
-                        "coins": STATE["profiles"][player_id]["coins"],
-                        "level": STATE["profiles"][player_id]["level"],
+                        "coins": profile["coins"],
+                        "level": profile["level"],
                     },
                 }
             )
@@ -103,6 +111,7 @@ class Handler(BaseHTTPRequestHandler):
         body = self._read_json()
 
         if path == "/auth/login":
+            # Intentionally permissive for local revival/testing: creates local profile on first login.
             username = body.get("username") or body.get("user") or body.get("deviceId") or "player_local"
             player_id = f"p_{hashlib.sha256(username.encode('utf-8')).hexdigest()[:8]}"
             token = secrets.token_hex(24)

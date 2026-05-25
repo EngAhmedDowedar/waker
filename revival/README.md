@@ -9,15 +9,15 @@ This repository is a decompiled Android client, so this toolkit focuses on local
 ## 1) Extract endpoints inventory
 
 ```bash
-python3 /home/runner/work/waker/waker/tools/extract_endpoints.py \
-  --root /home/runner/work/waker/waker \
-  --output /home/runner/work/waker/waker/revival/endpoints_inventory.json
+python3 tools/extract_endpoints.py \
+  --root . \
+  --output revival/endpoints_inventory.json
 ```
 
 ## 2) Run local backend
 
 ```bash
-python3 /home/runner/work/waker/waker/tools/local_backend.py --port 8080
+python3 tools/local_backend.py --port 8080
 ```
 
 Use `--host 0.0.0.0` only when you explicitly need remote devices on your LAN to connect.
@@ -35,15 +35,15 @@ Available endpoints:
 ## 3) Generate hosts overrides
 
 ```bash
-python3 /home/runner/work/waker/waker/tools/generate_hosts_override.py \
-  --inventory /home/runner/work/waker/waker/revival/endpoints_inventory.json \
-  --output /home/runner/work/waker/waker/revival/hosts.override
+python3 tools/generate_hosts_override.py \
+  --inventory revival/endpoints_inventory.json \
+  --output revival/hosts.override
 ```
 
 Example apply on Linux host:
 
 ```bash
-sudo sh -c 'cat /home/runner/work/waker/waker/revival/hosts.override >> /etc/hosts'
+sudo sh -c 'cat revival/hosts.override >> /etc/hosts'
 ```
 
 Example apply on Android emulator (rooted image):
@@ -51,7 +51,7 @@ Example apply on Android emulator (rooted image):
 ```bash
 adb root
 adb remount
-adb push /home/runner/work/waker/waker/revival/hosts.override /sdcard/hosts.override
+adb push revival/hosts.override /sdcard/hosts.override
 adb shell su -c 'cat /sdcard/hosts.override >> /etc/hosts'
 ```
 
