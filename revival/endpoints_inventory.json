@@ -5,7 +5,6 @@
     "https"
   ],
   "urls": [
-    "http://%s:%d/",
     "http://10.10.32.105:9092/api/inappMsg/",
     "http://adlog.flurry.com",
     "http://ads.flurry.com",
@@ -17,34 +16,27 @@
     "http://city-arab.anansigame.org:2095/page/pwdreset",
     "http://city-arab.anansigame.org:8080/",
     "http://city.wiyun.com/mobilefaq/helpfaq.html",
-    "http://close_view",
     "http://curl.haxx.se/docs/http-cookies.html",
     "http://data.flurry.com/aap.do",
     "http://etherx.jabber.org/streams",
     "http://flurry.cachefly.net/adSpaceStyles/images/bttn-close-bw.png",
     "http://gaandroid.talkingdata.net/g/d?crc=",
-    "http://hostname/",
-    "http://hostname/?",
     "http://id1.cn.com/a/",
     "http://jabber.org/protocol/compress",
     "http://oc.umeng.co/check_config_update",
     "http://oc.umeng.com/check_config_update",
     "http://plus.google.com/",
-    "http://s3.amazonaws.com/anansi-bucket/cityen-download/respkg/%s",
     "http://s3.amazonaws.com/anansi-bucket/police/cityarab_policy.html",
     "http://sandbox.payssion.com/",
     "http://sandbox.payssion.com/api/v1/",
     "http://schemas.android.com/apk/res-auto",
     "http://schemas.android.com/apk/res/android",
-    "http://trx.9191card.com/trx/paymentTrxOrder.action?customerNumber=%s&requestId=%s&productType=%s&amount=%d&cardNo=%s&cardPwd=%s&encrypt=%d&callbackUrl=%s&sign=%s&userIP=%s&extInfo=%s",
     "http://www.example.com",
     "http://www.google.com",
     "http://www.jivesoftware.com/xmlns/xmpp/properties",
     "http://www.sakhabgame.com/EN/soft/CityRes_005.zip",
     "http://www.winimage.com/zLibDll",
     "http://xmlpull.org/v1/doc/features.html#process-namespaces",
-    "https://%s:%d/",
-    "https://.facebook.com",
     "https://adlog.flurry.com",
     "https://ads.flurry.com",
     "https://ads.flurry.com/v6/getAds.do",
@@ -56,7 +48,6 @@
     "https://developers.facebook.com/docs/sharing/android",
     "https://events.appsflyer.com/api/v2.3/androidevent?buildnumber=1.17&app_id=",
     "https://facebook.com",
-    "https://facebook.com/device?user_code=%1$s&qr=1",
     "https://goo.gl/NAOOOI",
     "https://goo.gl/NAOOOI.",
     "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/mraid/v2/mraid_app_banner.js",
@@ -64,8 +55,6 @@
     "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/mraid/v2/mraid_app_interstitial.js",
     "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/native_ads.html",
     "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/sdk-core-v40.html",
-    "https://graph-video.%s",
-    "https://graph.%s",
     "https://imasdk.googleapis.com/admob/sdkloader/native_video.html",
     "https://ingest.vungle.com/",
     "https://market.android.com/details?id=",
@@ -115,8 +104,6 @@
     "https://xdrig.com/push"
   ],
   "hosts": [
-    "%s",
-    ".facebook.com",
     "10.10.32.105",
     "adlog.flurry.com",
     "ads.flurry.com",
@@ -128,7 +115,6 @@
     "appstat.anansicorp.org",
     "city-arab.anansigame.org",
     "city.wiyun.com",
-    "close_view",
     "csi.gstatic.com",
     "curl.haxx.se",
     "data.flurry.com",
@@ -140,9 +126,6 @@
     "gaandroid.talkingdata.net",
     "goo.gl",
     "googleads.g.doubleclick.net",
-    "graph-video.%s",
-    "graph.%s",
-    "hostname",
     "id1.cn.com",
     "imasdk.googleapis.com",
     "ingest.vungle.com",
@@ -160,7 +143,6 @@
     "sdk.appsflyer.com",
     "support.google.com",
     "track.appsflyer.com",
-    "trx.9191card.com",
     "twitter.com",
     "u.talkingdata.net",
     "wild-city-9abb9.firebaseio.com",
@@ -209,30 +191,14 @@
       "https://track.appsflyer.com/api/v2.3/uninsall?buildnumber=1.17",
       "track.appsflyer.com"
     ],
-    "smali/com/facebook/login/DeviceAuthDialog$RequestState.smali": [
-      "facebook.com",
-      "https://facebook.com/device?user_code=%1$s&qr=1"
-    ],
     "smali/com/facebook/internal/Utility.smali": [
-      ".facebook.com",
       "facebook.com",
-      "https://.facebook.com",
       "https://facebook.com"
-    ],
-    "smali/com/facebook/internal/ServerProtocol.smali": [
-      "graph-video.%s",
-      "graph.%s",
-      "https://graph-video.%s",
-      "https://graph.%s"
     ],
     "smali/com/facebook/internal/Validate.smali": [
       "developers.facebook.com",
       "https://developers.facebook.com/docs/android/getting-started",
       "https://developers.facebook.com/docs/sharing/android"
-    ],
-    "smali/com/anansimobile/nge/NGWebView$NGWebViewClient.smali": [
-      "close_view",
-      "http://close_view"
     ],
     "smali/com/payssion/android/sdk/Payssion.smali": [
       "https://www.payssion.com/",
@@ -277,17 +243,11 @@
       "plus.google.com"
     ],
     "smali/com/google/ads/conversiontracking/g.smali": [
-      "hostname",
-      "http://hostname/?",
       "https://pubads.g.doubleclick.net/activity;dc_iu=",
       "https://pubads.g.doubleclick.net/activity;xsp=",
       "https://www.googleadservices.com/pagead/conversion/",
       "pubads.g.doubleclick.net",
       "www.googleadservices.com"
-    ],
-    "smali/com/google/ads/conversiontracking/InstallReceiver.smali": [
-      "hostname",
-      "http://hostname/"
     ],
     "smali/com/google/android/vending/expansion/downloader/impl/DownloadThread.smali": [
       "127.0.0.1"
@@ -1483,7 +1443,6 @@
       "schemas.android.com"
     ],
     "lib/armeabi/libcity_ar.so": [
-      "%s",
       "appstat.anansicorp.org",
       "appstat.anansicorp.org:8992",
       "city-arab.anansigame.org",
@@ -1491,24 +1450,19 @@
       "city-arab.anansigame.org:8080",
       "city.wiyun.com",
       "curl.haxx.se",
-      "http://%s:%d/",
       "http://appstat.anansicorp.org:8992/logevent/weightevent",
       "http://city-arab.anansigame.org:2095/page/pwdreset",
       "http://city-arab.anansigame.org:8080/",
       "http://city.wiyun.com/mobilefaq/helpfaq.html",
       "http://curl.haxx.se/docs/http-cookies.html",
-      "http://s3.amazonaws.com/anansi-bucket/cityen-download/respkg/%s",
       "http://s3.amazonaws.com/anansi-bucket/police/cityarab_policy.html",
-      "http://trx.9191card.com/trx/paymentTrxOrder.action?customerNumber=%s&requestId=%s&productType=%s&amount=%d&cardNo=%s&cardPwd=%s&encrypt=%d&callbackUrl=%s&sign=%s&userIP=%s&extInfo=%s",
       "http://www.sakhabgame.com/EN/soft/CityRes_005.zip",
       "http://www.winimage.com/zLibDll",
-      "https://%s:%d/",
       "https://play.google.com/store/apps/details?id=com.anansimobile.city_ar",
       "https://twitter.com/Wild_Cityarabic",
       "https://www.facebook.com/wkralawghad",
       "play.google.com",
       "s3.amazonaws.com",
-      "trx.9191card.com",
       "twitter.com",
       "www.facebook.com",
       "www.sakhabgame.com",

@@ -7,6 +7,7 @@ from typing import Dict, Iterable, List, Set
 from urllib.parse import urlparse
 
 URL_RE = re.compile(r"https?://[A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;=%]+")
+PRINTF_TOKEN_RE = re.compile(r"%(\d+\$)?[sd]")
 IP_PORT_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}(?::\d{2,5})?\b")
 HOST_PORT_RE = re.compile(
     r"\b((?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)\.)+[A-Za-z]{2,63}):(\d{2,5})\b"
@@ -40,7 +41,21 @@ def extract_strings_from_binary(blob: bytes, minimum: int = 4) -> Iterable[str]:
 def collect_patterns(text: str, source: str, hits: Dict[str, List[str]], out: Dict[str, Set[str]]) -> None:
     raw_urls = URL_RE.findall(text)
     urls: List[str] = []
+
+    def is_valid_host(host: str) -> bool:
+        if not host:
+            return False
+        if host.startswith(".") or host.endswith("."):
+            return False
+        if "%" in host:
+            return False
+        if host in {"hostname", "close_view"}:
+            return False
+        return True
+
     for raw_url in raw_urls:
+        if PRINTF_TOKEN_RE.search(raw_url):
+            continue
         try:
             parsed = urlparse(raw_url)
         except Exception:
@@ -48,6 +63,8 @@ def collect_patterns(text: str, source: str, hits: Dict[str, List[str]], out: Di
         if parsed.scheme not in {"http", "https"}:
             continue
         if not parsed.hostname:
+            continue
+        if not is_valid_host(parsed.hostname):
             continue
         urls.append(raw_url)
     ips = IP_PORT_RE.findall(text)
@@ -60,9 +77,14 @@ def collect_patterns(text: str, source: str, hits: Dict[str, List[str]], out: Di
         except Exception:
             host = None
         if host:
+            if not is_valid_host(host):
+                continue
             hosts.add(host)
     for hp in host_ports:
-        hosts.add(hp.split(":", 1)[0])
+        host = hp.split(":", 1)[0]
+        if not is_valid_host(host):
+            continue
+        hosts.add(host)
 
     if urls or hosts or ips or host_ports:
         hits[source] = sorted(set(urls + list(hosts) + ips + host_ports))
