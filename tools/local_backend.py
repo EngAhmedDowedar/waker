@@ -164,8 +164,12 @@ class Handler(BaseHTTPRequestHandler):
             if not player_id:
                 self._send_json({"ok": False, "error": "unauthorized"}, HTTPStatus.UNAUTHORIZED)
                 return
-            delta_coins = int(body.get("deltaCoins", 0))
-            delta_level = int(body.get("deltaLevel", 0))
+            try:
+                delta_coins = int(body.get("deltaCoins", 0))
+                delta_level = int(body.get("deltaLevel", 0))
+            except (TypeError, ValueError):
+                self._send_json({"ok": False, "error": "invalid_delta_type"}, HTTPStatus.BAD_REQUEST)
+                return
             if abs(delta_coins) > MAX_DELTA_COINS or abs(delta_level) > MAX_DELTA_LEVEL:
                 self._send_json({"ok": False, "error": "delta_out_of_range"}, HTTPStatus.BAD_REQUEST)
                 return
