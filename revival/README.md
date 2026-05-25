@@ -51,6 +51,7 @@ Output:
 - `GET /ping` -> no body
 - `POST /auth/login`
   - accepted fields: `username` or `user` or `deviceId`
+  - accepts both JSON and `application/x-www-form-urlencoded`
 - `GET /config/bootstrap` -> no auth
 - `GET /player/profile`
   - auth: `Authorization: Bearer <token>` or `?token=...`
@@ -58,16 +59,17 @@ Output:
   - auth: `Authorization: Bearer <token>` or `?token=...`
 - `POST /player/state`
   - auth required
+  - accepts both JSON and `application/x-www-form-urlencoded`
   - body fields:
     - `deltaCoins` (int, max absolute `1000000`)
     - `deltaLevel` (int, max absolute `10000`)
 - `POST /logevent/weightevent`
-  - accepts any JSON and returns `{ok:true}` to avoid analytics hard-fail
+  - logs exact incoming shape: `Content-Type`, parsed body, text preview, and hex preview
 - `GET /page/pwdreset`
   - returns placeholder HTML page
 - unknown `GET/POST` endpoints now return safe fallback `{ok:true, fallback:true, ...}` for resilience
 
-Verbose request/response logs are enabled in backend output.
+Verbose request/response logs are enabled in backend output, including request `Content-Type`, parsed JSON/form body, UTF-8 preview, and raw hex preview so you can see the real payload shape sent by the game client.
 
 ---
 

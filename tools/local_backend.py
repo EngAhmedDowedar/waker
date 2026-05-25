@@ -7,7 +7,7 @@ import threading
 import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from typing import Dict, List
+from typing import Any, Dict, List
 from urllib.parse import parse_qs, urlparse
 
 # Guardrails for local state mutation endpoints to prevent unrealistic accidental or malicious jumps.
@@ -33,13 +33,54 @@ class Handler(BaseHTTPRequestHandler):
             return text[:max_len] + "...(truncated)"
         return text
 
-    def _log_request(self, body: Dict | None = None) -> None:
+    def _normalize_form(self, payload: Dict[str, List[str]]) -> Dict[str, Any]:
+        return {key: values[0] if len(values) == 1 else values for key, values in payload.items()}
+
+    def _read_body_details(self) -> Dict[str, Any]:
+        length = int(self.headers.get("Content-Length", "0"))
+        if length <= 0:
+            return {"content_type": self.headers.get("Content-Type", ""), "raw": b"", "text": "", "parsed": {}}
+        raw = self.rfile.read(length)
+        text = raw.decode("utf-8", errors="replace")
+        content_type = self.headers.get("Content-Type", "")
+        lower_content_type = content_type.lower()
+        parsed: Any = {}
+        if "application/json" in lower_content_type:
+            try:
+                parsed = json.loads(text)
+            except Exception:
+                parsed = {}
+        elif "application/x-www-form-urlencoded" in lower_content_type:
+            parsed = self._normalize_form(parse_qs(text, keep_blank_values=True))
+        elif "multipart/form-data" in lower_content_type:
+            parsed = {"_multipart": True}
+        return {
+            "content_type": content_type,
+            "raw": raw,
+            "text": text,
+            "parsed": parsed,
+        }
+
+    def _request_body_summary(self, body_details: Dict[str, Any]) -> Dict[str, Any]:
+        raw = body_details["raw"]
+        text = body_details["text"]
+        summary: Dict[str, Any] = {
+            "content_type": body_details["content_type"],
+            "content_length": len(raw),
+            "parsed": body_details["parsed"],
+        }
+        if raw:
+            summary["text_preview"] = text[:400]
+            summary["hex_preview"] = raw[:64].hex()
+        return summary
+
+    def _log_request(self, body_details: Dict[str, Any] | None = None) -> None:
         headers = {k: v for k, v in self.headers.items()}
         if "Authorization" in headers:
             headers["Authorization"] = "Bearer <redacted>"
         msg = f"{self.command} {self.path} headers={self._safe_json(headers)}"
-        if body is not None:
-            msg += f" body={self._safe_json(body)}"
+        if body_details is not None:
+            msg += f" body={self._safe_json(self._request_body_summary(body_details))}"
         print(msg)
 
     def _send_json(self, payload: Dict, status: int = HTTPStatus.OK) -> None:
@@ -60,17 +101,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
         print(f"RESPONSE {self.command} {self.path} status={status} body=<html>")
 
-    def _read_json(self) -> Dict:
-        length = int(self.headers.get("Content-Length", "0"))
-        if length <= 0:
-            return {}
-        raw = self.rfile.read(length)
-        if not raw:
-            return {}
-        try:
-            return json.loads(raw.decode("utf-8"))
-        except Exception:
-            return {}
+    def _body_fields(self, body_details: Dict[str, Any]) -> Dict[str, Any]:
+        parsed = body_details.get("parsed")
+        return parsed if isinstance(parsed, dict) else {}
 
     def _token_from_request(self) -> str:
         auth = self.headers.get("Authorization", "")
@@ -149,11 +182,11 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
-        body = self._read_json()
-        self._log_request(body)
+        body_details = self._read_body_details()
+        body = self._body_fields(body_details)
+        self._log_request(body_details)
 
         if path == "/auth/login":
-            # Intentionally permissive for local revival/testing: creates local profile on first login.
             username = body.get("username") or body.get("user") or body.get("deviceId") or "player_local"
             player_id = f"p_{hashlib.sha256(username.encode('utf-8')).hexdigest()[:16]}"
             token = secrets.token_hex(24)
@@ -200,10 +233,18 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         if path == "/logevent/weightevent":
-            self._send_json({"ok": True, "accepted": True, "event": body})
+            self._send_json({"ok": True, "accepted": True, "event": self._request_body_summary(body_details)})
             return
 
-        self._send_json({"ok": True, "fallback": True, "method": "POST", "path": path, "echo": body})
+        self._send_json(
+            {
+                "ok": True,
+                "fallback": True,
+                "method": "POST",
+                "path": path,
+                "echo": self._request_body_summary(body_details),
+            }
+        )
 
 
 def main() -> None:
