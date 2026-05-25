@@ -5,7 +5,6 @@
     "https"
   ],
   "urls": [
-    "http://10.10.32.105:9092/api/inappMsg/",
     "http://adlog.flurry.com",
     "http://ads.flurry.com",
     "http://ads.flurry.com/v6/getAds.do",
@@ -16,6 +15,7 @@
     "http://city-arab.anansigame.org:2095/page/pwdreset",
     "http://city-arab.anansigame.org:8080/",
     "http://city.wiyun.com/mobilefaq/helpfaq.html",
+    "http://close",
     "http://curl.haxx.se/docs/http-cookies.html",
     "http://data.flurry.com/aap.do",
     "http://etherx.jabber.org/streams",
@@ -104,7 +104,6 @@
     "https://xdrig.com/push"
   ],
   "hosts": [
-    "10.10.32.105",
     "adlog.flurry.com",
     "ads.flurry.com",
     "alog.umeng.co",
@@ -115,6 +114,7 @@
     "appstat.anansicorp.org",
     "city-arab.anansigame.org",
     "city.wiyun.com",
+    "close",
     "csi.gstatic.com",
     "curl.haxx.se",
     "data.flurry.com",
@@ -199,6 +199,10 @@
       "developers.facebook.com",
       "https://developers.facebook.com/docs/android/getting-started",
       "https://developers.facebook.com/docs/sharing/android"
+    ],
+    "smali/com/anansimobile/nge/NGWebView$NGWebViewClient.smali": [
+      "close",
+      "http://close"
     ],
     "smali/com/payssion/android/sdk/Payssion.smali": [
       "https://www.payssion.com/",
@@ -378,9 +382,7 @@
       "u.talkingdata.net"
     ],
     "smali/com/tendcloud/tenddata/game/be.smali": [
-      "10.10.32.105",
-      "10.10.32.105:9092",
-      "http://10.10.32.105:9092/api/inappMsg/"
+      "10.10.32.105:9092"
     ],
     "smali/com/tendcloud/tenddata/game/bh.smali": [
       "https://xdrig.com/push",

@@ -24,6 +24,11 @@ def is_valid_host(host: str) -> bool:
         return False
     if IP_RE.match(host):
         return False
+    if "." not in host:
+        return False
+    tld = host.rsplit(".", 1)[-1]
+    if len(tld) < 2 or not tld.isalpha():
+        return False
     return True
 
 

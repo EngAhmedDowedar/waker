@@ -113,7 +113,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/auth/login":
             # Intentionally permissive for local revival/testing: creates local profile on first login.
             username = body.get("username") or body.get("user") or body.get("deviceId") or "player_local"
-            player_id = f"p_{hashlib.sha256(username.encode('utf-8')).hexdigest()[:8]}"
+            player_id = f"p_{hashlib.sha256(username.encode('utf-8')).hexdigest()[:16]}"
             token = secrets.token_hex(24)
             STATE["tokens"][token] = player_id
             if player_id not in STATE["profiles"]:
@@ -141,6 +141,9 @@ class Handler(BaseHTTPRequestHandler):
                 return
             delta_coins = int(body.get("deltaCoins", 0))
             delta_level = int(body.get("deltaLevel", 0))
+            if abs(delta_coins) > 1_000_000 or abs(delta_level) > 10_000:
+                self._send_json({"ok": False, "error": "delta_out_of_range"}, HTTPStatus.BAD_REQUEST)
+                return
             profile = STATE["profiles"].get(player_id)
             if not profile:
                 self._send_json({"ok": False, "error": "profile_not_found"}, HTTPStatus.NOT_FOUND)
